@@ -2,17 +2,16 @@ package domain;
 
 import java.util.StringTokenizer;
 
-public class Time {
-    public static int HOURS_PER_DAY = 24;
-    public static int MINUTES_PER_HOUR = 60;
-    private int hour;
+public class TimeV2 {
+    private static int HOURS_PER_DAY = 24;
+    private static int MINUTES_PER_HOUR = 60;
+    private static  int MINUTES_PER_DAY = 1440;
     private int minutes;
-    public Time() { // int hour, int minutes
-        this.hour = 12;
-        this.minutes = 0;
+    public TimeV2() { // int hour, int minutes
+        this.minutes = MINUTES_PER_DAY / 2;
     }
 
-    public Time(String s) throws BadHourException, BadMinuteException, BadFormatException
+    public TimeV2(String s) throws BadHourException, BadMinuteException, BadFormatException
     {
         if(!s.matches("^[0-9]{1,2}:[0-9]{1,2}$")) throw new BadFormatException(s);
         StringTokenizer st = new StringTokenizer(s, ":");
@@ -22,7 +21,7 @@ public class Time {
         if(minutes < 0  && minutes >= 60) throw new BadMinuteException(minutes);
     }
 
-    public Time(int h, int m) throws BadHourException, BadMinuteException {
+    public TimeV2(int h, int m) throws BadHourException, BadMinuteException {
         if(hour < 0 && hour >= 24) throw new BadHourException(hour);
         hour = h;
         if(minutes < 0 && minutes >= 60) throw new BadMinuteException(minutes);
@@ -30,7 +29,7 @@ public class Time {
     }
 
     public int hour() {
-        return hour;
+        return  minutes / MINUTES_PER_HOUR;
     }
 
     public int minute() {
