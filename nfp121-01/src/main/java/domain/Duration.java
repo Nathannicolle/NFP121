@@ -2,6 +2,7 @@ package domain;
 
 public class Duration {
     private int duration;
+    private int hour;
     public Duration() {
 
     }
@@ -28,7 +29,7 @@ public class Duration {
 
     @Override
     public String toString() {
-        return "Durée : " + this.duration;
+        return "Durée : " + this.duration + " minutes";
     }
 
     public int getDuration() {

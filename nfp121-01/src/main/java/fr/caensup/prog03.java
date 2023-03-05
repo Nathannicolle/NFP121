@@ -1,5 +1,6 @@
 package fr.caensup;
 
+import domain.Duration;
 import domain.TimeV2;
 
 public class prog03 {

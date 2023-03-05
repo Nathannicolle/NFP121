@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TimeTest {
     @Test
-    void constructorTest() {
+    void constructorTest() throws BadMinuteException, BadHourException, BadFormatException {
         Time t = new Time();
         assertEquals(12, t.hour());
         assertEquals(0, t.minute());
@@ -26,7 +26,7 @@ class TimeTest {
         Exception e;
         e = assertThrows(BadFormatException.class, () -> new Time("8h20"));
         e = assertThrows(BadHourException.class, () -> new Time(24, 0));
-        e = assertThrows(BadMinuteException.class, () -> new Time(24, 45))
+        e = assertThrows(BadMinuteException.class, () -> new Time(24, 45));
     }
 
     @Test
@@ -48,7 +48,7 @@ class TimeTest {
     }
 
     @Test
-    void oneHourLaterTest() {
+    void oneHourLaterTest() throws BadMinuteException, BadHourException {
         Time t = new Time(15, 20);
         t.oneHourLater();
         assertEquals(16, t.hour());
@@ -61,7 +61,7 @@ class TimeTest {
     }
 
     @Test
-    void oneHourEarlierTest() {
+    void oneHourEarlierTest() throws BadMinuteException, BadHourException {
         Time t = new Time(10, 8);
         t.oneHourEarlier();
         assertEquals(9, t.hour());
@@ -73,7 +73,7 @@ class TimeTest {
     }
 
     @Test
-    void oneMinuteEarlier() {
+    void oneMinuteEarlier() throws BadMinuteException, BadHourException {
         Time t = new Time(15, 20);
         t.oneMinuteEarlier();
         assertEquals(15, t.hour());
@@ -91,7 +91,7 @@ class TimeTest {
     }
 
     @Test
-    void toStringTest() {
+    void toStringTest() throws BadMinuteException, BadHourException {
         Time t = new Time(10, 27);
         assertEquals("10:27", t.toString());
         t = new Time(8, 23);
