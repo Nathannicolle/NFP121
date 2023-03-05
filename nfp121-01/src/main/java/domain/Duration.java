@@ -16,8 +16,26 @@ public class Duration {
         }
     }
 
+    public void oneHourLater() {
+        duration += 60;
+    }
+
+    public void oneHourEarlier() {
+        if(duration >= 60) {
+            duration -= 60;
+        }
+    }
+
     @Override
     public String toString() {
         return "Durée : " + this.duration;
+    }
+
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }
