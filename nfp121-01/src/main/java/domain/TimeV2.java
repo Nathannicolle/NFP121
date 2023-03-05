@@ -7,6 +7,8 @@ public class TimeV2 {
     private static int MINUTES_PER_HOUR = 60;
     private static  int MINUTES_PER_DAY = 1440;
     private int minutes;
+    private int hour;
+
     public TimeV2() { // int hour, int minutes
         this.minutes = MINUTES_PER_DAY / 2;
     }
