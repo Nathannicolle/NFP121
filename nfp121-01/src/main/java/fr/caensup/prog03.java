@@ -18,5 +18,9 @@ public class prog03 {
         for(TimeV2 t: times) {
             System.out.println(t);
         }
+
+        Duration duration = new Duration();
+        duration.setDuration(3600);
+        System.out.println(duration);
     }
 }

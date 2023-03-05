@@ -27,9 +27,14 @@ public class Duration {
         }
     }
 
+    public double convertInHour() {
+        hour = duration / 60;
+        return hour;
+    }
+
     @Override
     public String toString() {
-        return "Durée : " + this.duration + " minutes";
+        return "Durée : " + this.duration + " minutes, Soit : " + convertInHour() + " heures";
     }
 
     public int getDuration() {
