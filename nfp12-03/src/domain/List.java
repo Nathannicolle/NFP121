@@ -28,6 +28,8 @@ public class List<ElementType> {
             last.next = newListElement;
             newListElement.previous = last;
         }
+
+        numberOfElements++;
     }
 
     public void remove(ElementType element) {
@@ -37,7 +39,35 @@ public class List<ElementType> {
     }
 
     public int size() {
-        return 0;
+        return numberOfElements;
+    }
+
+    private ElementType getFromBeginning(int index) {
+        ListElement current = first;
+        while (current != null && index > 0) {
+            current = current.next;
+            index--;
+        }
+
+        return current.content;
+    }
+
+    private ElementType getFromEnd(int index) {
+        ListElement current = last;
+        while (current != null && index > 0) {
+            current = current.previous;
+            index--;
+        }
+
+        return current.content;
+    }
+
+    public ElementType get(int index) {
+        if(index < size() / 2) {
+            return getFromBeginning(index);
+        }
+
+        return  getFromEnd(index - 1);
     }
 
     public boolean isEmpty() {
