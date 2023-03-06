@@ -2,31 +2,57 @@ package domain;
 
 import java.util.StringTokenizer;
 
-public class DurationV1 extends Clock {
-    public static int HOURS_PER_DAY = 24;
-    public static int MINUTES_PER_HOUR = 60;
-    private int hour = 1;
-    private int minutes;
+public class Duree extends Clock {
 
-    public DurationV1() { // int hour, int minutes
-        this.hour = 12;
-        this.minutes = 0;
+    public Duree() {
+        super(1,0);
+        h = 1;
+        m = 0;
     }
 
-    public DurationV1(String s) throws BadHourException, BadMinuteException, BadFormatException
-    {
-        if(!s.matches("^[0-9]{1,2}:[0-9]{1,2}$")) throw new BadFormatException(s);
+    public void oneHourMore() {
+        h++;
+    }
+
+    public Duree(int hour, int minute) throws BadHourException, BadMinuteException {
+        super();
+        if(hour < 0) throw new BadHourException(hour);
+        h = hour;
+        if(minute < 0 || minute >= MINUTES_PER_HOUR) throw new BadMinuteException(minute);
+        m = minute;
+    }
+    public Duree(String s) throws BadHourException, BadMinuteException, BadFormatException {
+        super();
+        if(!s.matches("^[0-9]+h[0-5][0-9]$")) throw new BadFormatException(s);
         StringTokenizer st = new StringTokenizer(s, ":");
-        hour = Integer.parseInt(st.nextToken());
-        if(hour < 0  && hour >= 24) throw new BadHourException(hour);
-        minutes = Integer.parseInt(st.nextToken());
-        if(minutes < 0  && minutes >= 60) throw new BadMinuteException(minutes);
+        h = Integer.parseInt(st.nextToken());
+        if(h < 0) throw new BadHourException(h);
+        m = Integer.parseInt(st.nextToken());
+        if(m < 0 || m >= MINUTES_PER_HOUR) throw new BadMinuteException(m);
     }
 
-    public DurationV1(int h, int m) throws BadHourException, BadMinuteException {
-        if(hour < 0 && hour >= 24) throw new BadHourException(hour);
-        hour = h;
-        if(minutes < 0 && minutes >= 60) throw new BadMinuteException(minutes);
-        minutes = m;
+
+    public void oneHourLess() throws NegativeDurationException {
+        if(h <1) throw new NegativeDurationException(this);
+        h--;
+        if(h < 0) h = HOURS_PER_DAY - 1;
     }
+
+
+    public void oneMinuteLess() throws NegativeDurationException {
+        m--;
+        if(m < 0) {
+            m = MINUTES_PER_HOUR - 1;
+            oneHourLess();
+        }
+    }
+
+    public String toString() {
+        String s = "v1 ";
+        s += h + "h";
+        s+= (m < 10) ? "0" : "";
+        s+=m;
+        return s;
+    }
+
 }
