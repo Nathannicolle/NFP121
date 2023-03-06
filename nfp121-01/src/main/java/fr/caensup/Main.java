@@ -8,7 +8,7 @@ import static domain.Math.*;
 public class Main {
     public static void main(String[] args) throws BadFormatException {
         System.out.println(square(PI));
-        Time t;
+        TimeV1 t;
         boolean ok = true;
         int h, m;
         Scanner sc = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Main {
         do {
             ok = true;
             try {
-                t = new Time(h, m);
+                t = new TimeV1(h, m);
             } catch (BadHourException e) {
                 ok = false;
                 System.out.println(e);
