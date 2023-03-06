@@ -36,6 +36,20 @@ public class List<ElementType> {
     }
 
     public void remove(int index) {
+        ListElement current = first;
+        while (current != null & index > 0) {
+            current = current.next;
+            index--;
+        }
+
+        if(current != first) current.previous.next = current.next;
+        else first = current.next;
+
+        if(current != last) current.next.previous = current.previous;
+        else last = current.previous;
+
+        current.next = current.previous = null;
+        numberOfElements--;
     }
 
     public int size() {
