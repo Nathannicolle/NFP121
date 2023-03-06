@@ -6,8 +6,8 @@ public interface Time {
     int hour();
     int minute();
     void oneMinuteLater();
-    void oneMinuteEarlier();
+    void oneMinuteEarlier() throws NegativeDurationException;
     void oneHourLater();
-    void oneHourEarlier();
+    void oneHourEarlier() throws  NegativeDurationException;
     String toString();
 }
